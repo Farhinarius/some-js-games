@@ -1,0 +1,193 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Sosi pipisku</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: rgb(0, 0, 0); display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="sss" width="640" height="480"></canvas>
+
+<script>
+var canvas = document.getElementById("sss");
+var ctx = canvas.getContext("2d");
+var speed=0;
+var rightPressed=false;
+var leftPressed=false;
+var upPressed=false;
+var downPressed=false;
+var rightSpeed=0;
+var upSpeed=0;
+var leftSpeed=0;
+var downSpeed=0;
+
+
+let mc = 
+{
+    x: 300,
+    y: 360,
+    dx: 40,
+    dy: 80,
+    speed: 0,
+}
+
+//ORIGIN (20,40)
+function drawMc()
+{
+    ctx.beginPath();
+    ctx.rect(mc.x, mc.y, mc.dx, mc.dy);
+    ctx.fillStyle = "pink";
+    ctx.fill();
+    ctx.closePath();
+}
+
+
+
+
+function draw()
+{
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawMc();
+
+    if (rightPressed)
+    {
+        if (rightSpeed<=2.5)
+        {
+            rightSpeed+=0.1;
+            mc.x+=rightSpeed;
+        }
+        if (rightSpeed>2.5)
+        {
+            rightSpeed=2.5;
+        }
+    }
+    else
+    {
+        if (rightSpeed>0)
+        {
+            rightSpeed-=0.1;
+            mc.x+=rightSpeed;
+        }
+    }
+    if (leftPressed)
+    {
+        if (leftSpeed<=2.5)
+        {
+            leftSpeed+=0.1;
+            mc.x-=leftSpeed;
+        }
+        if (leftSpeed>2.5)
+        {
+            leftSpeed=2.5;
+        }
+    }
+    else
+    {
+        if (leftSpeed>0)
+        {
+            leftSpeed-=0.1;
+            mc.x-=leftSpeed;
+        }
+    }
+    if (upPressed)
+    {
+        if (upSpeed<=2.5)
+        {
+            upSpeed+=0.1;
+            mc.y-=upSpeed;
+        }
+        if (upSpeed>2.5)
+        {
+            upSpeed=2.5;
+        }
+    }
+    else
+    {
+        if (upSpeed>0)
+        {
+            upSpeed-=0.1;
+            mc.y-=upSpeed;
+        }
+    }
+    if (downPressed)
+    {
+        if (downSpeed<=2.5)
+        {
+            downSpeed+=0.1;
+            mc.y+=downSpeed;
+        }
+        if (downSpeed>2.5)
+        {
+            downSpeed=2.5;
+        }
+    }
+    else
+    {
+        if (downSpeed>0)
+        {
+            downSpeed-=0.1;
+            mc.y+=downSpeed;
+        }
+    }
+
+
+    
+}
+
+
+
+
+
+
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+function keyDownHandler(e)
+{
+    if(e.key == "Right" || e.key == "ArrowRight")
+    {
+        rightPressed = true;
+    }
+    if(e.key == "Left" || e.key == "ArrowLeft")
+    {
+        leftPressed = true;
+    }
+    if(e.key == "Up" || e.key == "ArrowUp")
+    {
+        upPressed = true;
+    }
+    if(e.key == "Down" || e.key == "ArrowDown")
+    {
+        downPressed = true;
+    }
+}
+function keyUpHandler(e)
+{
+    if(e.key == "Right" || e.key == "ArrowRight")
+    {
+        rightPressed = false;
+    }
+    if(e.key == "Left" || e.key == "ArrowLeft")
+    {
+        leftPressed = false;
+    }
+    if(e.key == "Up" || e.key == "ArrowUp")
+    {
+        upPressed = false;
+    }
+    if(e.key == "Down" || e.key == "ArrowDown")
+    {
+        downPressed = false;
+    }
+}
+
+
+
+setInterval(draw,15);
+</script>
+
+</body>
+</html>
